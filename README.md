@@ -1,0 +1,4 @@
+scgen
+=====
+
+Short code generator.
