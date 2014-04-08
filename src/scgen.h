@@ -10,6 +10,7 @@ typedef struct ScgenConfig
     bool stdin_opt;
     bool verbose;
     bool styled;
+    std::string merge_file;
     int32_t code_length;
     std::vector<std::string> filenames;
 } ScgenConfig;

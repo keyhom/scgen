@@ -3,12 +3,13 @@
 #include <iostream>
 #include "scgen.h"
 
-const char* const short_options = "hvl:s";
+const char* const short_options = "hvl:sm:";
 const struct option long_options[] = {
     {"help", 0, NULL, 'h'},
     {"version", 0, NULL, 'v'},
     {"length", 2, NULL, 'l'},
     {"styled", 0, NULL, 's'},
+    {"merge", 1, NULL, 'm'},
     {0, 0, 0, 0}
 };
 
@@ -26,6 +27,7 @@ const char* usages[] = {
     "-v,    --verbose                       trace the debug output message.",
     "-l,    --length                        set the length of code.",
     "-s,    --styled                        print the result with styled format.",
+    "-m,    --merge                         Merge from the specified file input.",
     "",
     "Message bug reports and suggestions to jeremy.",
     ""
@@ -58,6 +60,9 @@ int main(int argc, char** argv)
                 break;
             case 's':
                 scgen_config.styled = true;
+                break;
+            case 'm':
+                scgen_config.merge_file = std::string(optarg);
                 break;
             case '?':
             default:
@@ -122,6 +127,7 @@ int main(int argc, char** argv)
     }
 
     Generate();
+
     return 0;
 }
 
