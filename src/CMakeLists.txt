@@ -8,4 +8,5 @@ foreach(f ${SRC_LISTS})
 endforeach(f)
 
 add_executable(${PROJECT_NAME} ${SRC_LISTS})
+target_link_libraries(${PROJECT_NAME} jsoncpp)
 

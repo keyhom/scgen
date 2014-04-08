@@ -9,6 +9,7 @@ typedef struct ScgenConfig
 {
     bool stdin_opt;
     bool verbose;
+    bool styled;
     int32_t code_length;
     std::vector<std::string> filenames;
 } ScgenConfig;

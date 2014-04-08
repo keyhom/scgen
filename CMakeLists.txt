@@ -8,7 +8,9 @@ set(BASE_CFLAGS "-Wall")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${BASE_CFLAGS} -O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${BASE_CFLAGS} -O3")
 
-set(TARGET_DIR "${PROJECT_BINARY_DIR}/target")
+set(INCLUDE_DIR "${PROJECT_BINARY_DIR}/include")
 
-add_subdirectory(src ${TARGET_DIR})
+include_directories("include")
+add_subdirectory(jsoncpp "${PROJECT_BINARY_DIR}/jsoncpp")
+add_subdirectory(src "${PROJECT_BINARY_DIR}/${PROJECT_NAME}")
 

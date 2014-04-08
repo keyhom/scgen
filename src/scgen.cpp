@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <iostream> 
 #include <sstream>
+#include "json/json.h"
 
-struct ScgenConfig scgen_config = { false, false, 4 };
+struct ScgenConfig scgen_config = { false, false, false, 4 };
 
 const char codes[] = {
     'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
@@ -31,16 +32,27 @@ std::string randomCode(int32_t length)
     return ss.str();
 }
 
+// Generates the result.
 void Generate()
 {
-    srand((unsigned)time(NULL));
+    Json::Value root; // construct a json object.
     // make sure the scgen_config.filenames wasn't empty.
     std::vector<std::string>::iterator it;
     // loop the filenames and process them.
+    srand((unsigned)time(NULL));
 
     for (it = scgen_config.filenames.begin(); it != scgen_config.filenames.end(); ++it)
     {
-        std::cout << (*it) << "," << randomCode(scgen_config.code_length) << std::endl;
+        root[(*it)] = randomCode(scgen_config.code_length);
     }
 
+    if (scgen_config.styled)
+    {
+        std::cout << root.toStyledString() << std::endl;
+    }
+    else
+    {
+        Json::FastWriter writer;
+        std::cout << writer.write(root) << std::endl;
+    }
 }

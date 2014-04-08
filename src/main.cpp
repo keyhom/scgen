@@ -3,11 +3,12 @@
 #include <iostream>
 #include "scgen.h"
 
-const char* const short_options = "hvl:";
+const char* const short_options = "hvl:s";
 const struct option long_options[] = {
     {"help", 0, NULL, 'h'},
     {"version", 0, NULL, 'v'},
     {"length", 2, NULL, 'l'},
+    {"styled", 0, NULL, 's'},
     {0, 0, 0, 0}
 };
 
@@ -23,6 +24,8 @@ const char* usages[] = {
     "Options: ",
     "-h,    --help                          print this help.",
     "-v,    --verbose                       trace the debug output message.",
+    "-l,    --length                        set the length of code.",
+    "-s,    --styled                        print the result with styled format.",
     "",
     "Message bug reports and suggestions to jeremy.",
     ""
@@ -52,6 +55,9 @@ int main(int argc, char** argv)
                 break;
             case 'l':
                 scgen_config.code_length = atoi(optarg);
+                break;
+            case 's':
+                scgen_config.styled = true;
                 break;
             case '?':
             default:
